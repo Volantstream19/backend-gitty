@@ -35,4 +35,10 @@ describe('user routes', () => {
       exp: expect.any(Number),
     });
   });
+
+  it('/api/v1/github deletes a user session', async () => {
+    await request(app).get('/api/v1/github/login');
+    const resp = await request(app).delete('/api/v1/github');
+    expect(resp.status).toEqual(204);
+  });
 });
