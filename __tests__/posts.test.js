@@ -30,4 +30,25 @@ describe('posts routes', () => {
       ]
     `);
   });
+
+  it('/posts should post when logged in', async () => {
+    await request(app).post('/api/v1/posts').send({ post: 'Insert Post' });
+    const resp = await request(app).get('/api/v1/posts');
+    expect(resp.body).toMatchInlineSnapshot(`
+      Array [
+        Object {
+          "id": "1",
+          "post": "Hello this is my 1st post",
+        },
+        Object {
+          "id": "2",
+          "post": "Hello this is my 2nd post",
+        },
+        Object {
+          "id": "3",
+          "post": "Hello this is my 3rd post",
+        },
+      ]
+    `);
+  });
 });
